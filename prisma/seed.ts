@@ -1,4 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import {PrismaClient} from '@prisma/client'
+
 const prisma = new PrismaClient()
 async function main() {
     await prisma.game.create({
@@ -18,6 +19,7 @@ async function main() {
             name: "Game-3",
 
         }
+    })
 }
 main()
     .then(async () => {
