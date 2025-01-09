@@ -5,5 +5,5 @@ export async function CreateButton({
 }: {
   action: () => Promise<void>;
 }) {
-  return <Button>Создать игру</Button>;
+  return <Button onClick={action}>Создать игру</Button>;
 }

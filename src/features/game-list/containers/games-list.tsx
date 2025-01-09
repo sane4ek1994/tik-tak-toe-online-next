@@ -8,7 +8,7 @@ export async function GamesList() {
 
   console.log(games);
   return (
-    <Layout actions={<CreateButton action={} />}>
+    <Layout actions={<CreateButton />}>
       {games.map((game) => (
         <GameCard
           key={game.id}
