@@ -1,4 +1,4 @@
-import { GamesList } from "@/features/game-list/ui/server";
+import { GamesList } from "@/features/game-list/server";
 
 export default async function Home() {
   return (
