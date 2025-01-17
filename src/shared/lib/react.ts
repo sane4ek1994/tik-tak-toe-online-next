@@ -5,7 +5,7 @@ export function useActionState<State, InitialState>(
   initialState: InitialState,
   permalink?: string,
 ): [
-  state: Awaited<State | InitialState>,
+  state: Awaited<State> | InitialState,
   dispatch: () => void,
   isPending: boolean,
 ];
@@ -20,9 +20,11 @@ export function useActionState<State, InitialState, Payload>(
 ];
 
 export function useActionState(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   action: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialState: any,
-  permalink?: string,
+  premalink?: string,
 ) {
-  return useActionStateReact(action, initialState, permalink);
+  return useActionStateReact(action, initialState, premalink);
 }

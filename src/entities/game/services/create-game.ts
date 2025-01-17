@@ -14,7 +14,7 @@ export const createGame = async (player: PlayerEntity) => {
   );
 
   if (isGameIdleStatus) {
-    return left("can create only one game" as const);
+    return left("can-create-only-one-game" as const);
   }
   const createdGame = await gameRepository.createGame({
     id: cuid(),

@@ -6,7 +6,6 @@ import { CreateButton } from "./create-button";
 export async function GamesList() {
   const games = await getIdleGames();
 
-  console.log(games);
   return (
     <Layout actions={<CreateButton />}>
       {games.map((game) => (
