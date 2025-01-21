@@ -15,7 +15,7 @@ export const createGameAction = async () => {
   const gameResult = await createGame(user);
 
   if (gameResult.type === "right") {
-    redirect(`/game${gameResult.value.id}`);
+    redirect(`/game/${gameResult.value.id}`);
   }
 
   // return {
