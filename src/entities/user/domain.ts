@@ -12,3 +12,5 @@ export type SessionEntity = {
   id: UserId;
   login: string;
 };
+
+export type DEFAULT_RATING = string;

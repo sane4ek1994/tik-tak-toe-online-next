@@ -1,4 +1,4 @@
-import { UserEntity } from "@/entities/user/services/domain";
+import { UserEntity } from "@/entities/user/domain";
 import { prisma } from "@/shared/lib/db";
 import { Prisma } from "@prisma/client";
 
