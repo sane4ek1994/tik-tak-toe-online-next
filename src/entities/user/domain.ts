@@ -13,4 +13,4 @@ export type SessionEntity = {
   login: string;
 };
 
-export type DEFAULT_RATING = string;
+export const DEFAULT_RATING = 1000;
