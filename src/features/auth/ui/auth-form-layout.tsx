@@ -21,7 +21,7 @@ export function AuthFormLayout({
   actions: React.ReactNode;
   link: React.ReactNode;
   error: React.ReactNode;
-  action: (formData: FormData) => Promise<void>;
+  action: (formData: FormData) => void;
 }) {
   return (
     <Card className="w-full max-w-md ">
@@ -31,7 +31,10 @@ export function AuthFormLayout({
         </CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <form action className="space-y-4  shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form
+        action={action}
+        className="space-y-4  shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      >
         {fields}
         {error}
         {actions}

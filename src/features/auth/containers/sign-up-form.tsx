@@ -10,13 +10,18 @@ import { signUpAction } from "@/features/auth/actions/sign-up";
 import { right } from "@/shared/lib/either";
 
 export function SignUpForm() {
-  useActionState(signUpAction, right(undefined));
+  const [formState, action, isPending] = useActionState(
+    signUpAction,
+    right(undefined),
+  );
+
   return (
     <AuthFormLayout
       title="Sign Up"
       description="Create your account to get started"
+      action={action}
       fields={<AuthFields />}
-      actions={<SubmitButton>Sign up</SubmitButton>}
+      actions={<SubmitButton isPending={isPending}>Sign up</SubmitButton>}
       link={
         <BottomLink
           text="Already have an account?"
@@ -24,7 +29,7 @@ export function SignUpForm() {
           url="/sign-in"
         />
       }
-      error={<ErrorMessage error={right(null)} />}
+      error={<ErrorMessage error={formState} />}
     />
   );
 }

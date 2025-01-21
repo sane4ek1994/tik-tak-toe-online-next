@@ -2,17 +2,7 @@ import { Label } from "@/shared/ui/label";
 import { Input } from "@/shared/ui/input";
 import { useId } from "react";
 
-export function AuthFields({
-  login,
-  password,
-  onChangeLogin,
-  onChangePassword,
-}: {
-  login: string;
-  password: string;
-  onChangeLogin: (val: string) => void;
-  onChangePassword: (val: string) => void;
-}) {
+export function AuthFields() {
   const loginId = useId();
   const passwordId = useId();
 
@@ -22,10 +12,9 @@ export function AuthFields({
         <Label htmlFor={loginId}>Login</Label>
         <Input
           id={loginId}
+          name="login"
           type="login"
           required
-          value={login}
-          onChange={(e) => onChangeLogin(e.target.value)}
           placeholder="Enter your login"
         />
       </div>
@@ -33,11 +22,10 @@ export function AuthFields({
         <Label htmlFor={passwordId}>Password</Label>
         <Input
           id={passwordId}
+          name="password"
           type="password"
           required
-          value={password}
-          onChange={(e) => onChangePassword(e.target.value)}
-          placeholder="••••••••"
+          placeholder="Enter your password"
         />
       </div>
     </>

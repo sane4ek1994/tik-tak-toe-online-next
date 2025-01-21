@@ -44,14 +44,7 @@ export function SignInForm() {
     <AuthFormLayout
       title="Sign In"
       description="Welcome back! Please sign in to your account"
-      fields={
-        <AuthFields
-          login={email}
-          password={password}
-          onChangeLogin={setEmail}
-          onChangePassword={setPassword}
-        />
-      }
+      fields={<AuthFields />}
       actions={<SubmitButton>Sign up</SubmitButton>}
       link={
         <BottomLink
