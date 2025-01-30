@@ -11,7 +11,6 @@ const formDataSchema = z.object({
 });
 
 export const signInAction = async (state: unknown, formData: FormData) => {
-  console.log(formData.get("login"), formData.get("password"));
   const data = Object.fromEntries(formData.entries());
 
   const result = formDataSchema.safeParse(data);
