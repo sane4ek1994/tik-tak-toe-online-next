@@ -2,7 +2,7 @@
 
 import { left, mapLeft } from "@/shared/lib/either";
 import { z } from "zod";
-import { createUser, sessionService } from "@/entities/user/server";
+import { sessionService, verifyUserPassword } from "@/entities/user/server";
 import { redirect } from "next/navigation";
 
 const formDataSchema = z.object({
@@ -18,17 +18,17 @@ export const signInAction = async (state: unknown, formData: FormData) => {
     return left(`Ошибка валидации: ${result.error.message}`);
   }
 
-  const createUserResult = await createUser(result.data);
+  const verifyUserResult = await verifyUserPassword(result.data);
 
-  if (createUserResult.type === "right") {
-    await sessionService.addSession(createUserResult.value);
+  if (verifyUserResult.type === "right") {
+    await sessionService.addSession(verifyUserResult.value);
 
     redirect("/");
   }
 
-  return mapLeft(createUserResult, (error) => {
+  return mapLeft(verifyUserResult, (error) => {
     return {
-      "user-login-exists": "Пользователь с таким login существует",
+      "user-wrong-password": "Неверный логин или пароль",
     }[error];
   });
 };
