@@ -1,3 +1,5 @@
-export function Game() {
-  return <div>game</div>;
+import { GameLayout } from "@/features/game/server";
+
+export function Game({ gameId }: { gameId: string }) {
+  return <GameLayout />;
 }
