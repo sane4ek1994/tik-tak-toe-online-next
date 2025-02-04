@@ -49,7 +49,9 @@ export const GameSymbols = {
   X: "X",
   O: "O",
 };
-export const getCurrentStep = (game: GameInProgressEntity) => {
+export const getGameCurrentStep = (
+  game: GameInProgressEntity | GameOverEntity | GameOverDrawEntity,
+) => {
   const symbols = game.field.filter((s) => s !== null).length;
 
   return symbols % 2 === 0 ? GameSymbols.X : GameSymbols.O;

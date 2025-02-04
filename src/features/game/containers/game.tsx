@@ -1,6 +1,6 @@
 import { GameLayout } from "@/features/game/server";
 import { GamePlayers } from "@/features/game/ui/players";
-import { GameEntity } from "@/entities/game";
+import { GameEntity } from "@/entities/game/domain";
 
 export function Game({ gameId }: { gameId: string }) {
   const game: GameEntity = {
