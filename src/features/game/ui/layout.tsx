@@ -9,7 +9,6 @@ import React from "react";
 
 export function GameLayout({
   status,
-  actions,
   field,
   players,
 }: {
@@ -26,9 +25,9 @@ export function GameLayout({
       <CardContent className="flex flex-col gap-4">
         {players}
         {status}
-        {field}
+        <div className="flex items-center justify-center">{field}</div>
       </CardContent>
-      <CardFooter>{actions}</CardFooter>
+      <CardFooter>actions</CardFooter>
     </Card>
   );
 }
