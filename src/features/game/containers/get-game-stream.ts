@@ -27,8 +27,8 @@ export function getGameStream(res: NextRequest) {
    * Остановка потока при прерывании запроса.
    */
   res.signal.addEventListener("abort", () => {
+    console.log("Disconnected");
     clearInterval(interval);
-    writer.close();
   });
 
   return new Response(responseStream.readable, {
