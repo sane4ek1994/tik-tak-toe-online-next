@@ -1,41 +1,17 @@
 import { NextRequest } from "next/server";
+import { sseStream } from "@/shared/lib/sse/server";
 
-/**
- * Создает потоковую передачу игровых данных.
- *
- * @param {NextRequest} res - Запрос Next.js, содержащий информацию о соединении.
- * @returns {Response} Ответ с потоком данных в формате Server-Sent Events (SSE).
- */
-export function getGameStream(res: NextRequest) {
-  /** @type {TransformStream} Потоковая передача данных. */
-  const responseStream = new TransformStream();
-  /** @type {WritableStreamDefaultWriter} Записывающий поток. */
-  const writer = responseStream.writable.getWriter();
-  /** @type {TextEncoder} Кодировщик текста для преобразования строк в Uint8Array. */
-  const encoder = new TextEncoder();
+export function getGameStream(req: NextRequest) {
+  const { response, handleClose, write } = sseStream(req);
 
-  let counter = 1;
-  /**
-   * Интервал для отправки данных каждые N миллисекунд.
-   * @type {NodeJS.Timeout}
-   */
-  const interval = setInterval(() => {
-    writer.write(encoder.encode(`data: ${counter++}\n\n`));
-  }, 1000); // Интервал в 1 секунду (для примера)
+  let counter = 0;
+  const innterval = setInterval(() => {
+    write(counter++);
+  }, 1000);
 
-  /**
-   * Остановка потока при прерывании запроса.
-   */
-  res.signal.addEventListener("abort", () => {
-    console.log("Disconnected");
-    clearInterval(interval);
+  handleClose(() => {
+    clearInterval(innterval);
   });
 
-  return new Response(responseStream.readable, {
-    headers: {
-      "Content-Type": "text/event-stream",
-      Connection: "keep-alive",
-      "Cache-Control": "no-cache, no-transform",
-    },
-  });
+  return { response };
 }
