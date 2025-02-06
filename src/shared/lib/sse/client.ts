@@ -9,10 +9,9 @@ export function useEventsSource<T>(url: string, def: T) {
 
     gameEvents.addEventListener("message", (message) => {
       try {
-        setData(JSON.parse(message.data));
         setError(undefined);
+        setData(JSON.parse(message.data));
       } catch (e) {
-        console.error("events parse error", e);
         setError(e);
       }
     });
