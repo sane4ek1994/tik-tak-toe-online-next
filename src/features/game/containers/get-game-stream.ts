@@ -1,7 +1,3 @@
-/**
- * @module GameStream
- */
-
 import { NextRequest } from "next/server";
 
 /**
@@ -24,7 +20,7 @@ export function getGameStream(res: NextRequest) {
    * @type {NodeJS.Timeout}
    */
   const interval = setInterval(() => {
-    writer.write(encoder.encode(`counter: ${counter++}\n`));
+    writer.write(encoder.encode(`data: ${counter++}\n\n`));
   }, 1000); // Интервал в 1 секунду (для примера)
 
   /**
