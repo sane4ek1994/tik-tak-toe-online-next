@@ -39,6 +39,7 @@ export const sseStream = (
    */
   const handleClose = (onDisconnect: () => void) => {
     req.signal.addEventListener("abort", () => {
+      console.log("disconnect signal🔴");
       onDisconnect();
     });
   };
