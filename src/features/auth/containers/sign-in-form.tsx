@@ -7,6 +7,7 @@ import { ErrorMessage } from "@/features/auth/ui/error";
 import { AuthFormLayout } from "@/features/auth/ui/auth-form-layout";
 import { useActionState } from "@/shared/lib/react";
 import { signInAction, SignInFormState } from "@/features/auth/actions/sign-in";
+import { routes } from "@/kernel/route";
 
 export function SignInForm() {
   const [formState, action, isPending] = useActionState(
@@ -25,7 +26,7 @@ export function SignInForm() {
         <BottomLink
           text="Don't have an account?"
           linkText="Sign up"
-          url="/sign-up"
+          url={routes.signUp()}
         />
       }
       error={<ErrorMessage error={formState.errors?._errors} />}

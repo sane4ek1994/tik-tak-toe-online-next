@@ -35,7 +35,6 @@ async function getGame(where?: Prisma.GameWhereInput) {
 
   return undefined;
 }
-
 async function createGame(game: GameIdleEntity): Promise<GameEntity> {
   const creatorGame = await prisma.game.create({
     data: {

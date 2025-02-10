@@ -2,6 +2,7 @@ import { Button } from "@/shared/ui/button";
 import { ReactNode } from "react";
 import { sessionService } from "@/entities/user/services/session";
 import { redirect } from "next/navigation";
+import { routes } from "@/kernel/route";
 
 /**
  * Форма, предназначенная для удаления текущей пользовательской сессии и перенаправления на страницу авторизации.
@@ -41,7 +42,7 @@ export default async function PrivateLayout({
             action={async () => {
               "use server";
               await sessionService.deleteSession();
-              redirect("/sign-in");
+              redirect(routes.signIn());
             }}
           >
             <Button>Sign out</Button>

@@ -9,10 +9,12 @@ export async function getGameStream(
 ) {
   const { id } = await params;
 
-  const game = getGameById(id);
+  const game = await getGameById(id);
+
+  console.log(game);
 
   if (!game) {
-    return new Response(`Game not found`, { status: 400 });
+    return new Response(`Game not found`, { status: 404 });
   }
 
   const { response, handleClose, write } = sseStream(req);
