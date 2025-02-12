@@ -17,4 +17,6 @@ export async function startGame(gameId: GameId, player: PlayerEntity) {
   if (game.creator.id === player.id) {
     return left("creator-can-not-start-game" as const);
   }
+
+  return gameRepository.startGame(gameId, player);
 }
