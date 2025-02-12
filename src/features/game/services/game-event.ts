@@ -1,4 +1,5 @@
 import { GameDomain } from "@/entities/game";
+import { GameId } from "@/kernel/ids";
 
 type GameEvent = {
   type: "game-changed";
@@ -8,17 +9,26 @@ type GameEvent = {
 type Listener = (game: GameEvent) => void;
 
 class GameEventsService {
-  listeners = new Set<Listener>();
+  listeners = new Map<GameId, Set<Listener>>();
 
-  addListener(listener: Listener) {
-    this.listeners.add(listener);
+  addListener(gameId: GameId, listener: Listener) {
+    let listeners = this.listeners.get(gameId);
+
+    if (!listeners) {
+      listeners = new Set([listener]);
+      this.listeners.set(gameId, listeners);
+    }
+
+    listeners.add(listener);
+
     return () => {
-      this.listeners.delete(listener);
+      listeners.delete(listener);
     };
   }
 
   emit(game: GameDomain.GameEntity) {
-    for (const listener of this.listeners) {
+    const listeners = this.listeners.get(game.id) ?? new Set();
+    for (const listener of listeners) {
       listener({ type: "game-changed", data: game });
     }
   }
