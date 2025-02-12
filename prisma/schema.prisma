@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Game {
+model GameClient {
   id    String     @id @default(cuid())
   status GameStatus
   players User[] @relation("games")

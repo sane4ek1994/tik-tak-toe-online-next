@@ -7,7 +7,7 @@ import { GameField } from "@/features/game/ui/field";
 import { useGame } from "@/features/game/model/use-game";
 import { GameId } from "@/kernel/ids";
 
-export function Game({ gameId }: { gameId: GameId }) {
+export function GameClient({ gameId }: { gameId: GameId }) {
   const { game, isPending } = useGame(gameId);
 
   if (!game || isPending) {
