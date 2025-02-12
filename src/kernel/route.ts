@@ -3,6 +3,6 @@ import { GameId } from "@/kernel/ids";
 export const routes = {
   signIn: () => "/sign-in",
   signUp: () => "/sign-up",
-  game: (gameId: GameId) => `/game${gameId}`,
-  gameStream: (gameId: GameId) => `/game${gameId}/stream`,
+  game: (gameId: GameId) => `/game/${gameId}`,
+  gameStream: (gameId: GameId) => `/game/${gameId}/stream`,
 };
