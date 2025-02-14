@@ -13,14 +13,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model GameClient {
-  id    String     @id @default(cuid())
-  status GameStatus
-  players User[] @relation("games")
-  winner User? @relation(fields: [winnerId], references: [id])
-  field Json?
-  winnerId String?
+model Game {
+  id         String      @id @default(cuid())
+  status     GameStatus
+
+  playerOne User
+  playerOneId String?
+  players    User[]      @relation("games")
+  winner     User?       @relation(fields: [winnerId], references: [id])
+  field      Json?
+  winnerId   String?
   gameOverAt String?
+}
+
+model Player {
+  gameId String
+  game Game
+  userId String
+  user User
+  index  Int
 }
 
 enum GameStatus {
@@ -31,12 +42,12 @@ enum GameStatus {
 }
 
 model User {
-  id    String     @id @default(cuid())
-  login String
-  rating Int
+  id           String   @id @default(cuid())
+  login        String
+  rating       Int
   passwordHash String
-  salt String @default("")
-
-  games Game[] @relation("games")
-  winnerGames Game[]
+  salt         String   @default("")
+  games        Game[]   @relation("games")
+  winnerGames  Game[]
 }
+
